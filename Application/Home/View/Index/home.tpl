@@ -262,6 +262,128 @@
                     </ol>
                 </li>
              </ol>
+             <h3>系统说明</h3>
+                <ol>
+                    <li>本系统采用php开发，使用bootstrape前端框架，thinkphp后端框架，数据库系统为mysql，前端页面交互使用angularjs</li>
+                    <li>你可以访问以下地址来获取系统源代码：<a href="https://github.com/yunzhiclub/webSiteTutorial">https://github.com/yunzhiclub/webSiteTutorial</a></li>
+                    <li>HTML+CSS在线学习站点：<a href="http://www.runoob.com/html/html-tutorial.html">菜鸟教程(www.runoob.com)</a>。同时，你还可以在该站点获取到PHP的内容</li>
+                    <li>bootstrape thinkphp mysql 的前期学习，可以参考<a href="http://www.imooc.com">www.imooc.com（慕课网）</a>中的相关课程</li>
+                    <li>bootstrape thinkphp mysql 的前期学习，还可以参考<a href="http://www.jikexueyuan.com">www.jikexueyuan.com(极客学院)</a>中的相关课程</li>
+                    <li>极客学院的部分课程为收费课程，我们购买了极客学院的会员，如果你有临时使用的需求，请发送邮件至1181551049@qq.com(李甜 云智团队成员 研一在读)获取。</li>
+                    <li>本系统数据库表结构如下：
+                        <pre>
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 50539
+ Source Host           : localhost
+ Source Database       : websitecrouse
+
+ Target Server Type    : MySQL
+ Target Server Version : 50539
+ File Encoding         : utf-8
+
+ Date: 04/01/2016 08:56:42 AM
+*/
+
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+--  Table structure for `mengyunzhi_attachment`
+-- ----------------------------
+DROP TABLE IF EXISTS `mengyunzhi_attachment`;
+CREATE TABLE `mengyunzhi_attachment` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `name` varchar(20) NOT NULL DEFAULT '' COMMENT '附件存在服务器上的名字',
+  `savename` varchar(100) NOT NULL DEFAULT '' COMMENT '附件显示名',
+  `type` varchar(100) NOT NULL DEFAULT '0' COMMENT '附件类型',
+  `source` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '资源ID',
+  `record_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '关联记录ID',
+  `download` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '下载次数',
+  `size` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '附件大小',
+  `savepath` varchar(40) NOT NULL DEFAULT '' COMMENT '上级目录',
+  `sort` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
+  `sha1` char(40) NOT NULL DEFAULT '',
+  `md5` char(32) NOT NULL DEFAULT '',
+  `ext` varchar(10) NOT NULL DEFAULT '' COMMENT '扩展名',
+  PRIMARY KEY (`id`),
+  KEY `idx_record_status` (`record_id`,`status`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='附件表';
+
+-- ----------------------------
+--  Table structure for `mengyunzhi_menu`
+-- ----------------------------
+DROP TABLE IF EXISTS `mengyunzhi_menu`;
+CREATE TABLE `mengyunzhi_menu` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '菜单id',
+  `title` varchar(40) CHARACTER SET utf8 DEFAULT NULL COMMENT '菜单标题名',
+  `subhead` varchar(40) CHARACTER SET utf8 DEFAULT NULL COMMENT '菜单副标题名',
+  `parent_id` int(10) DEFAULT '0' COMMENT '上级菜单id',
+  `icon` varchar(40) CHARACTER SET utf8 DEFAULT NULL COMMENT '小图标',
+  `module` varchar(40) CHARACTER SET utf8 DEFAULT NULL COMMENT '模块名',
+  `controller` varchar(40) CHARACTER SET utf8 DEFAULT NULL COMMENT '控制层名',
+  `action` varchar(40) CHARACTER SET utf8 DEFAULT NULL COMMENT '方法名',
+  `parameter` varchar(60) CHARACTER SET utf8 DEFAULT '' COMMENT '参数',
+  `url` varchar(200) CHARACTER SET utf8 DEFAULT NULL COMMENT 'url',
+  `order` int(10) DEFAULT '1' COMMENT '排序',
+  `state` tinyint(10) DEFAULT '1' COMMENT '状态，0表示禁用，1表示启用',
+  `show` tinyint(10) DEFAULT '1' COMMENT '是否显示，0表示隐藏，1表示显示 默认为1',
+  `development` tinyint(10) DEFAULT '0' COMMENT '是否开放模式，1代表开放模式 默认为0',
+  `remarks` varchar(40) CHARACTER SET utf8 DEFAULT '无' COMMENT '备注',
+  `abstract` text CHARACTER SET utf8 COMMENT '简介',
+  `dev_user` varchar(60) CHARACTER SET utf8 DEFAULT '' COMMENT '开发人员',
+  `dev_time` varchar(12) CHARACTER SET utf8 DEFAULT '0' COMMENT '开发开始日期',
+  `dev_branch` varchar(30) CHARACTER SET utf8 DEFAULT '' COMMENT '开发分支',
+  `tables` varchar(100) CHARACTER SET utf8 DEFAULT '' COMMENT '关联数据表',
+  `test_user` varchar(60) CHARACTER SET utf8 DEFAULT '' COMMENT '测试人员',
+  `check_user` varchar(60) CHARACTER SET utf8 DEFAULT '' COMMENT '验证人员',
+  `is_done` tinyint(2) unsigned DEFAULT '0' COMMENT '0未完成 1已完成',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=435 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+--  Table structure for `mengyunzhi_student`
+-- ----------------------------
+DROP TABLE IF EXISTS `mengyunzhi_student`;
+CREATE TABLE `mengyunzhi_student` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL DEFAULT '' COMMENT '姓名',
+  `num` varchar(10) NOT NULL DEFAULT '' COMMENT '学号',
+  `attachement_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '附件ID',
+  `is_visitor` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '0非旁听生 1旁听生',
+  `class` varchar(30) NOT NULL DEFAULT '' COMMENT '班级',
+  `is_registered` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '0未注册，1已注册',
+  `password` varchar(40) NOT NULL DEFAULT '' COMMENT '密码',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=151 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `mengyunzhi_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `mengyunzhi_user`;
+CREATE TABLE `mengyunzhi_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '用户名',
+  `password` varchar(255) NOT NULL DEFAULT '' COMMENT '用户密码',
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phonenumber` varchar(255) NOT NULL,
+  `district` varchar(255) DEFAULT '' COMMENT '区域',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+                        </pre>
+                    </li>
+                </ol>
             </div>
         </div>
     </div>
