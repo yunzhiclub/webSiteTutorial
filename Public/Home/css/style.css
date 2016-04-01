@@ -1,0 +1,12 @@
+.logo
+{
+    margin-top:0px;
+    margin-bottom:0px;
+    background-image: url('../image/logo.png');
+    background-repeat: no-repeat;
+}
+
+.logo h2
+{
+    font-family: "楷体","微软雅黑","宋体";
+}
