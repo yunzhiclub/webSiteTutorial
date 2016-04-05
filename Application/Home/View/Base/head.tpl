@@ -10,6 +10,8 @@
 <link href="__CSS__/style.css" rel="stylesheet">
 <script src="__BOW__/jquery/dist/jquery.min.js"></script>
 <script src="__ROOT__/js/angular1.4.8.min.js"></script>
+<script src="__ROOT__/lib/ngfileupload/ng-file-upload-shim.min.js"></script>
+<script src="__ROOT__/lib/ngfileupload/ng-file-upload.min.js"></script>
 <script type="text/javascript">
     var app = angular.module("app",[]);
 </script>
