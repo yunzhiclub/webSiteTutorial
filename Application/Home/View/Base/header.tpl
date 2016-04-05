@@ -7,7 +7,8 @@
         </h2>
         </div>
         <div class="col-sm-4 text-right">
-            <p><b>{:$expert['name']}</b> 欢迎您　　　</p>
+            <php>$student = session('student');</php>
+            <p><b>{:$student['name']}</b> 欢迎您　　　</p>
             <p><a href="{:U('Login/logout')}">注销 <span class="glyphicon glyphicon-log-out"></span></a>　　　</p>
         </div>
     </div>

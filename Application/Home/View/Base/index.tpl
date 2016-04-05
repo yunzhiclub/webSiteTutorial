@@ -5,7 +5,7 @@
     <include file="Base/head" />
 </head>
 
-<body>
+<body ng-app="app">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
