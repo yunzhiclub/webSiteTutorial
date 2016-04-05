@@ -22,20 +22,18 @@ class Ueditor{
 	 * 构造函数
 	 * @param int $uid    用户ID
 	 * @param array  $CONFIG 配置信息
+	 * @param string $action 
+	 * 
 	 */
-	public function __construct($uid = '', $CONFIG = array()){
-		//uid 为空则导入当前会话uid
-		//if(''===$uid) $this->uid = session('uid');
-		    	/* 检查是否合法上传 */
+	public function __construct($CONFIG = array(), $action){
+
+		/* 检查是否合法上传 */
 
 		//手动半闭trace防止json数据返回错误。
 		C('SHOW_PAGE_TRACE',false);
 		\Vin\FileStorage::connect(STORAGE_TYPE);
-		//导入设置
-		//由导入改为直接传值，解决了不同的URL的路径问题。
-		//$CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents(CONF_PATH."ueditor.json")), true);
-		// $CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents($configFile)), true);
-		$action = htmlspecialchars($_GET['action']);
+
+		$action = htmlspecialchars($action);
 		
 		switch($action){
 			case 'config':
@@ -383,7 +381,6 @@ class Ueditor{
         $format = str_replace("{hh}", $d[4], $format);
         $format = str_replace("{ii}", $d[5], $format);
         $format = str_replace("{ss}", $d[6], $format);
-        $format = str_replace("{uid}", $this->uid, $format);
         
         return $format;
     }
