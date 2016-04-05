@@ -286,22 +286,22 @@
                     <li>bootstrape thinkphp mysql 的前期学习，可以参考<a href="http://www.imooc.com">www.imooc.com（慕课网）</a>中的相关课程</li>
                     <li>bootstrape thinkphp mysql 的前期学习，还可以参考<a href="http://www.jikexueyuan.com">www.jikexueyuan.com(极客学院)</a>中的相关课程</li>
                     <li>极客学院的部分课程为收费课程，我们购买了极客学院的会员，如果你有临时使用的需求，请发送邮件至1454179583@qq.com(刘茜 计算机研一在读)获取。</li>
-                    <li>本系统数据库表结构如下（更新日期:2016.4.1,github对应代码标识:31d26e）：
+                    <li>本系统数据库表结构如下（更新日期:2016.4.5,github对应代码标识:98c2c37）：
                         <pre>
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : websitecrouse
  Source Server Type    : MySQL
- Source Server Version : 50539
- Source Host           : localhost
+ Source Server Version : 50616
+ Source Host           : 127.0.0.1
  Source Database       : websitecrouse
 
  Target Server Type    : MySQL
- Target Server Version : 50539
+ Target Server Version : 50616
  File Encoding         : utf-8
 
- Date: 04/01/2016 08:56:42 AM
+ Date: 04/05/2016 15:06:24 PM
 */
 
 SET NAMES utf8;
@@ -331,7 +331,7 @@ CREATE TABLE `mengyunzhi_attachment` (
   `ext` varchar(10) NOT NULL DEFAULT '' COMMENT '扩展名',
   PRIMARY KEY (`id`),
   KEY `idx_record_status` (`record_id`,`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='附件表';
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='附件表';
 
 -- ----------------------------
 --  Table structure for `mengyunzhi_menu`
@@ -372,13 +372,13 @@ CREATE TABLE `mengyunzhi_student` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL DEFAULT '' COMMENT '姓名',
   `num` varchar(10) NOT NULL DEFAULT '' COMMENT '学号',
-  `attachement_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '附件ID',
+  `attachment_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '附件ID',
   `is_visitor` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '0非旁听生 1旁听生',
   `class` varchar(30) NOT NULL DEFAULT '' COMMENT '班级',
   `is_registered` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '0未注册，1已注册',
   `password` varchar(40) NOT NULL DEFAULT '' COMMENT '密码',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=151 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 --  Table structure for `mengyunzhi_user`
@@ -395,7 +395,20 @@ CREATE TABLE `mengyunzhi_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+-- ----------------------------
+--  Table structure for `mengyunzhi_work`
+-- ----------------------------
+DROP TABLE IF EXISTS `mengyunzhi_work`;
+CREATE TABLE `mengyunzhi_work` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `attachment_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '附件ID',
+  `index` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '作业序号',
+  `student_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 SET FOREIGN_KEY_CHECKS = 1;
+
 
                         </pre>
                     </li>
