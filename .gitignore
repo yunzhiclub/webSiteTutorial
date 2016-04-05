@@ -7,3 +7,7 @@ Application/Common/Conf/debug.php
 *.sublime-workspace
 *.sublime-workspace
 composer.json
+
+Application/Home/Config/config.php
+
+Application/Admin/Conf/config.php
