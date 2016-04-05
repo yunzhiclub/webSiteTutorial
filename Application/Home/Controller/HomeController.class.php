@@ -10,19 +10,32 @@ class HomeController extends Controller
 {
     public function __construct()
     {   
-        //TODO：登陆模块完成后，将本行删除
-        session('user', array());
-
         //判断用户是否登陆
-        if (session('user') === null)
+        if (session('student') === null)
         {
             $this->redirect('Index/index',0);
             return;
         }
         else
         {
-            session('user', session('user'));
+            session('student', session('student'));
         }
         parent::__construct();
+    }
+
+    //返回学生信息，超出session，则直接跳转至登陆页
+    protected function getStudent()
+    {
+        $student = session("student");
+
+        if ($student == null)
+        {
+            $this->redirect('Index/index',0);
+            return;
+        }
+        else
+        {
+            return $student;
+        }
     }
 }
