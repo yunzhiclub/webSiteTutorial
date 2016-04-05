@@ -129,11 +129,11 @@ class StudentLogic extends StudentModel
      * @param  boolean $useSha1  是否使用sha1加密
      * @return true flase           
      */
-    public function checkUser($username, $password, $useSha1 = true)
+    public function checkUser($name, $password, $useSha1 = true)
     {
         //根据用户名获取用户密码与用户信息
         $user = array();
-        $user = $this->getUserInfoByName($username);
+        $user = $this->getListByName($name);
 
         if($user === null)
         {
@@ -141,7 +141,7 @@ class StudentLogic extends StudentModel
         }
         else if($useSha1 === true)
         {
-            if ($user['password'] == sha1($password))
+            if ($user['password'] == $this->makePassword($password))
             {
                 return true;
             }
@@ -165,13 +165,21 @@ class StudentLogic extends StudentModel
 
     //根据用户名取用户信息
     //$name string
-    public function getUserInfoByName($name)
+    public function getListByName($name)
     {
         $map = array();
-        $map['username'] = $name;
+        $map['name'] = $name;
         return $this->where($map)->find();
     }
 
+    /**
+     * 通过学号和密码来验证学生信息
+     * 正确，则返回学生数据，不正确，返回 false
+     * @param  int $num      学号
+     * @param  stirng $password 密码
+     * @return  正确，则返回学生数据，不正确，返回 false
+     * panjie
+     */
     public function validate($num, $password)
     {
         $map = array();
@@ -185,7 +193,7 @@ class StudentLogic extends StudentModel
             return false;
         }
 
-        if ($list['password'] !== sha1($password))
+        if ($list['password'] !== $this->makePassword($password))
         {
             $this->setError = "password increct";
             return false;
@@ -194,5 +202,15 @@ class StudentLogic extends StudentModel
         return $list;
     }
 
+    /**
+     * 按一定的算法，生成加密信息
+     * @param  string $password 加密前字符
+     * @return string           加密后字符 
+     * panjie
+     */
+    public function makePassword($password)
+    {
+        return sha1($password);
+    }
 
 }
