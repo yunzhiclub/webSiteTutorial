@@ -144,10 +144,24 @@ var dataInit = function(){
     };
 
     config.onUploadSuccess = function(file, data, response) {                    //设置正确返回结果
-        config.callback(file, JSON.parse(data), response);
+        try
+        {
+            //格式化字符串为json
+            data = JSON.parse(data);
+        }
+        catch(error)
+        {
+            console.log("data return formart error:" + data);
+        }
+        config.callback(file, data, response);
     };
 
-    console.log(config);
+    config.formData = {
+        'PHPSESSID':getCookie('PHPSESSID'),
+        'sessionId':'{:session_id()}' 
+    };
+
+    // console.log(config);
     $('#' + config.id).uploadify(config); //实例化
  };
 
@@ -308,4 +322,14 @@ function compareInt(x, y){
     }else{
         return 0;
     }
+}
+/**
+ * 通过name获取 cookie值
+ * @param  {string} name cookie字段
+ * @return {string}      数值
+ */
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
 }
