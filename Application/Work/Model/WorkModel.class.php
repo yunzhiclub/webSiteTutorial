@@ -2,7 +2,7 @@
 /**
  * 作业
  */
-namespace Work\Moel;
+namespace Work\Model;
 
 use Yunzhi\Model\YunzhiModel;
 
