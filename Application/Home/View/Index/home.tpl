@@ -1,9 +1,25 @@
 <extend name="Base:index" />
 <block name="wrapper">
-    <div class="row-fluid" ng-app="myApp" ng-controller="wordCtrl">
+    <div class="row-fluid">
         <div class="row">
             <div class="col-md-12 col-xs-12">
              <h3>第一次上机实验</h3>
+             <h4>说明：</h4>
+             <ol>
+                <li>
+                    上机实验计入平时成绩。
+                </li>
+                <li>
+                    按自已的想法或参考本页"实验步骤"进行河北工业大学官网的LOGO,MENU两个模块的代码设计.
+                </li>
+                <li>
+                    在 作业提交 中，提交最终的作业文件 index.html.
+                </li>
+                <li>
+                    在 个人中心 中提交自己的生活照片。
+                </li>
+             </ol>
+            <h4>实验步骤</h4>
              <ol>
                 <li>下载firefox浏览器，并安装web developer插件</li>
                 <li>进入layout官方站点，下载.ZIP压缩包，并解压至本机。如果有困难，可以直接本页的资源列表中下载。</li>
@@ -262,7 +278,7 @@
                     </ol>
                 </li>
              </ol>
-             <h3>系统说明</h3>
+             <h3>系统说明（选读）</h3>
                 <ol>
                     <li>本系统采用php开发，使用bootstrape前端框架，thinkphp后端框架，数据库系统为mysql，前端页面交互使用angularjs</li>
                     <li>你可以访问以下地址来获取系统源代码：<a href="https://github.com/yunzhiclub/webSiteTutorial">https://github.com/yunzhiclub/webSiteTutorial</a></li>
@@ -270,7 +286,7 @@
                     <li>bootstrape thinkphp mysql 的前期学习，可以参考<a href="http://www.imooc.com">www.imooc.com（慕课网）</a>中的相关课程</li>
                     <li>bootstrape thinkphp mysql 的前期学习，还可以参考<a href="http://www.jikexueyuan.com">www.jikexueyuan.com(极客学院)</a>中的相关课程</li>
                     <li>极客学院的部分课程为收费课程，我们购买了极客学院的会员，如果你有临时使用的需求，请发送邮件至1181551049@qq.com(李甜 云智团队成员 研一在读)获取。</li>
-                    <li>本系统数据库表结构如下：
+                    <li>本系统数据库表结构如下（更新日期:2016.4.1,github对应代码标识:31d26e）：
                         <pre>
 /*
  Navicat Premium Data Transfer
