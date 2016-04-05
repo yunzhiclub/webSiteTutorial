@@ -223,7 +223,7 @@ class YunzhiModel extends Model
         }
         catch (\Think\Exception $e)
         {
-            $this->setError = $e->getMessage();
+            $this->setError($e->getMessage());
             return false;
         }
     }
