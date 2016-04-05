@@ -14,10 +14,14 @@ class UploadController extends Controller
         //规避macos中，FF使用swf未成功传入cookie的问题.
         //对该问题的阐述，请参见：
         //http://www.mengyunzhi.com/share/javascript/208-php-uploadify-uploadify-http-status-302.html
-        session_destroy();
-        session_id($_POST['PHPSESSID']);
-        session_start();
-
+        //如果未传入session。则利用传入的phpsessid重置session
+        if (session_id() === "")
+        {
+            session_destroy();
+            session_id($_POST['PHPSESSID']);
+            session_start();
+        }
+        
         //判断用户是否登陆
         if (session('student') === null)
         {
