@@ -24,13 +24,14 @@ app.controller("register", function($scope, $http, $window) {
     });
 
     $scope.submit = function() {
-        $http.post("{:U('Student/submit')}", $scope.student).success(function(response) {
+        $http.post("{:U('Login/submit')}", $scope.student).success(function(response) {
             if (response.status == "SUCCESS")
             {
                 $scope.is_register = 0;
                 $scope.student.is_visitor = response.is_visitor;
                 $scope.student.class = response.class;
                 $scope.student.id = response.id;
+                $scope.isError = false;
             }
             else
             {
@@ -43,7 +44,7 @@ app.controller("register", function($scope, $http, $window) {
     $scope.register = function(){
         $http({
             "method":"post", 
-            "url": "{:U('Student/register')}", 
+            "url": "{:U('Login/register')}", 
             "data":$scope.student, 
             "headers":{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
             }).success(function(response) {
