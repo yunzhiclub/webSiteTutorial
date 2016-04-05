@@ -24,10 +24,10 @@
                 <li>下载firefox浏览器，并安装web developer插件</li>
                 <li>进入layout官方站点，下载.ZIP压缩包，并解压至本机。如果有困难，可以直接本页的资源列表中下载。</li>
                 <li>使用firefox打开www.hebut.edu.cn，并利用web developer插件查看图片及颜色信息</li>
-                <li>在src文件夹下，新建images文件夹，将有用的图片下载至该文件夹</li>
+                <li>在解压后的src文件夹下，新建images文件夹，将有用的图片下载至该文件夹</li>
                 <li>找开src文件夹下的index.html,双击使用系统自带的浏览器打开。</li>
                 <li>右键index.html, 并使用自己喜欢的编辑器（dreamweaver,editplus,sublime等）进行编辑</li>
-                <li>找到title与/tile(第8行），将原有的"Bootstrap 3, from LayoutIt!"删除掉，替换成自己的姓名+学号.比如：张三+10000</li>
+                <li>找到title与/title(第8行），将原有的"Bootstrap 3, from LayoutIt!"删除掉，替换成自己的姓名+学号.比如：张三+10000</li>
                 <li>删除index.html中 body 与 /body 间冗余的div信息.</li>
                 <li>按学校官网划出3个行</li>
                 <li>第一行：LOGO
@@ -120,8 +120,8 @@
                                     </pre></li>
                                 <li>将复制的代码粘贴到居中盒子中.</li>
                                 <li>修改src="http:xxxxx 为src="./images/xxxx，即显示本地图片</li>
-                                <li>如果看到效果了，那么恭喜你！</li>
-                                <li>如果没有，同样也恭喜你，因为排错本身也是一种快乐。当错误并排出的一瞬间，幸福感将油然而生。</li>
+                                <li>如果达到了预期效果，那么恭喜你！你的运气真的很适合与代码打交道。</li>
+                                <li>如果没有，同样也恭喜你，因为排错本身也是一种快乐。当错误被排出的那个瞬间，你将体会到编程中最大的幸福。</li>
                             </ol>
                         </li>
                     </ol>
@@ -285,7 +285,7 @@
                     <li>HTML+CSS在线学习站点：<a href="http://www.runoob.com/html/html-tutorial.html">菜鸟教程(www.runoob.com)</a>。同时，你还可以在该站点获取到PHP的内容</li>
                     <li>bootstrape thinkphp mysql 的前期学习，可以参考<a href="http://www.imooc.com">www.imooc.com（慕课网）</a>中的相关课程</li>
                     <li>bootstrape thinkphp mysql 的前期学习，还可以参考<a href="http://www.jikexueyuan.com">www.jikexueyuan.com(极客学院)</a>中的相关课程</li>
-                    <li>极客学院的部分课程为收费课程，我们购买了极客学院的会员，如果你有临时使用的需求，请发送邮件至1181551049@qq.com(李甜 云智团队成员 研一在读)获取。</li>
+                    <li>极客学院的部分课程为收费课程，我们购买了极客学院的会员，如果你有临时使用的需求，请发送邮件至1454179583@qq.com(刘茜 计算机研一在读)获取。</li>
                     <li>本系统数据库表结构如下（更新日期:2016.4.1,github对应代码标识:31d26e）：
                         <pre>
 /*
