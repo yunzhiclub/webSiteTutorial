@@ -89,25 +89,68 @@ class AttachmentLogic extends AttachmentModel
 	}
 
 	/**
-	 * 附件上传
-	 * 传入$_FILE['yunzhifile']
+	 * 附件上传接口。
+	 * 附件上传信息需放在 $_FILES['yunzhifile'] 中
 	 * @return list 附件上传后的信息
 	 * panjie
+	 * 
+	 * 示例代码：
+	 * 前台：<input name="yunzhifile" type="file" multiple="true" value="上传图片" />
+	 * 后台：
+	 * $AttachmentL = new Attachment\Logic\AttachmentLogic();
+     * $attachment = $AttachmentL->upload();
+     *
+     * 返回值示例： 成功
+     * ["state"]=>
+	 * string(7) "SUCCESS":成功。 "ERROR"：失败.
+	 * ["url"]=> 用于回显的图片URL
+	 * string(61) "/websitecrouse/Public/uploads/file/20160401/56fdfb7ea5ad4.jpg" 
+	 * ["title"]=> 附件存在服务器上的名称
+	 * string(13) "56fdfb7ea5ad4"
+	 * ["original"]=> 附件原始名称
+	 * string(24) "邮益宝申请单-1.jpg"
+	 * ["type"]=> 附件类型
+	 * string(10) "image/jpeg"
+	 * ["size"]=> 附件大小
+	 * int(848261)
+	 * ["name"]=> 附件原始名称
+	 * string(24) "邮益宝申请单-1.jpg"
+	 * ["md5"]=> 
+	 * string(32) "0e4e88add6581e5d299774f42c7fa102"
+	 * ["sha1"]=>
+	 * string(40) "0864784d78f1d3c794a0aaf263678cc205227d97"
+	 * ["key"]=>
+	 * int(0)
+	 * ["ext"]=> 扩展名
+	 * string(3) "jpg"
+	 * ["savename"]=> 服务器存的名称
+	 * string(13) "56fdfb7ea5ad4"
+	 * ["savepath"]=> 相对于上传文件夹的保存路径
+	 * string(15) "/file/20160401/"
+	 * ["id"]=> 附件ID
+	 * string(2) "19"
+	 * sreate_time:创建时间
+	 * download:下载次数
+	 * record_id:关联ID
+	 * sort:排序
+	 * update_time:更新时间
+	 * 返回示例：失败
+	 * 
 	 */
-	public function upload() 
+	public function upload($action = "", $config = array()) 
     {   
     	C('TOKEN_ON',false); //关闭令牌
-    	if (I('get.action') == "")
+    	if ($action == "")
     	{
-    		$_GET['action'] = "uploadfile";
+    		$action = I('get.action') === "" ? "uploadfile" : I('get.action');
     	}
-		$userId 	= 0;
 
-		//获取配置信息
+		//获取配置信息, 同时拼接传入配置信息
 		$configFile = APP_PATH . "Yunzhi/Conf/ueditor.json";
-		$config = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents($configFile)), true);
-		
-		$Ueditor 		= new \Org\Util\Ueditor($userId, $config);
+		$config = array_merge(json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents($configFile)), true), $config);
+
+		//实例化ueditor,使用ueditor提供的封装类，进行上传操作.
+		$Ueditor 		= new \Org\Util\Ueditor($config, $action);
 		$data = $Ueditor->getResult();
 
 		//返回成功，写入数据库
@@ -119,10 +162,31 @@ class AttachmentLogic extends AttachmentModel
 			}
 			else
 			{
-				$data['state'] = "Attachment save error, msg:" . $this->getError();
+				$data['state'] = "ERROR";
+				$data['message'] = "Attachment save error, msg:" . $this->getError();
 			}
 			
 		}
 		return $data;
     }    
+
+    /**
+     * 通过ID获取附件的URL地址
+     * @param  int $id 
+     * @return string    url地址，
+     * todo:我们将系统默认显示的图片放在这里
+     */
+    public function getUrlById($id)
+    {
+    	$id = (int)$id;
+    	$list = $this->getListById($id);
+    	if ($list == null)
+    	{
+    		return false;
+    	}
+    	else
+    	{
+    		return C("TMPL_PARSE_STRING.__UPLOADS__") . $list['savepath'] . $list['savename'] . '.'. $list['ext'];
+    	}
+    }
 }
