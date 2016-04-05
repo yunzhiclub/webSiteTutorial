@@ -6,9 +6,13 @@ namespace Home\Controller;
 
 use Student\Logic\StudentLogic;         //学生表
 use Home\Model\Student\personalCenterModel; //小对象
+use Home\Model\Student\workModel;           //作业小对象
+use Yunzhi\Logic\AttachmentLogic;           //附件
+use Work\Logic\WorkLogic;                   //作业
 
 class StudentController extends HomeController
 {
+    private $index = '1';
     public function personalCenterAction()
     {
         $student = session("student");
@@ -54,8 +58,67 @@ class StudentController extends HomeController
         $this->success("操作成功", U('personalCenter'));
     }
 
+    /**
+     * 作业提交action
+     * @return [type] [description]
+     */
     public function workAction()
     {
+        $WorkL = new WorkLogic();
+        $student = $this->getStudent();
+        $studentId = $student['id'];
+        $work = $WorkL->getListByIndexStudentId($this->index, $studentId);
+
+        $M = new workModel();
+        $this->assign("M", $M);
+        $this->assign("work", $work);
         $this->display();
+    }
+
+    //通过附件ID，获取文件的内容
+    public function getTextByAttachmentIdAction()
+    {
+        $attahmentId = I('get.id');
+        $AttachmentL = new AttachmentLogic();
+        $attachmentText = $AttachmentL->getTextById($attahmentId);
+        if ($attachmentText == false)
+        {
+            $result['status'] = "ERROR";
+            $result['message'] = $AttachmentL->getError();
+        }
+        else
+        {
+            $result['status'] = "SUCCESS";
+            $result['data'] = $attachmentText;
+        }
+
+        $this->ajaxReturn($result);
+    }
+
+    /**
+     * 提交代码文件后，进行提交。
+     * @return
+     */
+    public function workSubmitAction()
+    {
+        $student = $this->getStudent();
+        $WorkL = new WorkLogic();
+
+        $data['attachment_id'] = I('post.attachment_id');
+        $map['student_id'] = $student['id'];
+        $map['index'] = $this->index;
+
+        if ($WorkL->updateListByMap($data, $map) !== false)
+        {
+            $this->success("操作成功", U('work'));
+            return;
+        }
+        else
+        {
+            $this->error("操作失败,错误代码：" . $WorkL->getError(), U('work'));
+            return;
+        }
+
+        
     }
 }
