@@ -189,4 +189,42 @@ class AttachmentLogic extends AttachmentModel
     		return C("TMPL_PARSE_STRING.__UPLOADS__") . $list['savepath'] . $list['savename'] . '.'. $list['ext'];
     	}
     }
+
+    /**
+     * 通过ID获取文件内容(ascii编码)
+     * @param  int $id 
+     * @return string 含有ascii编码的文本
+     * 2016.04
+     */
+    public function getTextById($id)
+    {
+    	//获取附件信息
+    	$attachment = $this->getListById($id);
+    	if ($attachment == null)
+    	{
+    		$this->setError("$id list can't found");
+    		return false;
+    	}
+
+    	//拼接服务器路径
+    	$path = I('server.DOCUMENT_ROOT');
+    	$filePath = $path . C('TMPL_PARSE_STRING.__UPLOADS__') . $attachment['savepath'] . $attachment['savename'] . '.' . $attachment['ext'];
+    	
+    	//调用内置类，获取文件信息
+    	try
+    	{
+    		$text = "";
+    		$File = new \SplFileObject($filePath);
+	    	while (!$File -> eof())
+	    	{
+	    		$text .= $File->fgets();
+	    	}
+	    	return $text;
+    	}
+    	catch(\Exception $e)
+    	{
+    		$this->setError("Error:" . $e->getMessage());
+    		return false;
+    	}
+    }
 }
