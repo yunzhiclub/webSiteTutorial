@@ -157,8 +157,7 @@ var dataInit = function(){
     };
 
     config.formData = {
-        'PHPSESSID':getCookie('PHPSESSID'),
-        'sessionId':'{:session_id()}' 
+        'PHPSESSID':getCookie('PHPSESSID')
     };
 
     // console.log(config);
