@@ -3,76 +3,59 @@
  * 学生管理
  */
 namespace Home\Controller;
-use Think\Controller;
 
-use Student\Logic\StudentLogic;
+use Student\Logic\StudentLogic;         //学生表
+use Home\Model\Student\personalCenterModel; //小对象
 
-class StudentController extends Controller
+class StudentController extends HomeController
 {
-    public function submitAction()
+    public function personalCenterAction()
     {
-        $result = array("class"=>"", 'is_visitor'=>0);
+        $student = session("student");
+        $M = new personalCenterModel();
 
-        $postdata = file_get_contents("php://input");
-        $post = json_decode($postdata, true);
-        
-        $data = array();
-        $data['num'] = $post['num'];
-
-        $StudentL = new StudentLogic();
-        $student = $StudentL->where($data)->find();
-
-        if ($student === null)
-        {
-            $result['is_visitor'] = 1;
-        }
-        else
-        {
-            if ($student['name'] == $post['name'] && $student['is_registered'] == 0)
-            {
-
-                $result['class'] = $student['class'];
-            }
-            else
-            {
-                $result['status'] = "ERROR";
-                $result['message'] = "Information Error";
-                $this->ajaxReturn($result);
-            }
-            
-        }
-        $result['status'] = "SUCCESS";
-        $result['id'] = $student['id'];
-
-        $this->ajaxReturn($result);
+        $this->assign("M", $M);
+        $this->assign("student", $student);
+        $this->display();
     }
 
-    public function registerAction()
+
+    public function saveAction()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST))
-            $_POST = json_decode(file_get_contents('php://input'), true);
+        $post = I('post.');
+        $student = $this->getStudent();
+        $StudentL = new StudentLogic();
 
         $data = array();
-        $student['id'] = I('post.id');
-        $student['num'] = I('post.num');
-        $student['name'] =I('post.name');
-        $student['password'] = sha1(I('password'));
-        $student['is_visitor'] = I('post.is_visitor');
-        $student['class'] = I('post.class');
-        $student['is_registered'] = 1;
+        $data['id'] = $student['id'];
+        $data['attachment_id'] = $post['attachment_id'];
 
-        $StudentL = new StudentLogic();
-        if ($StudentL->saveList($student) === false)
+        //如果传入的密码不为空，但传入的密码错误，则报错。
+        if ($post['password'] !== "" && ($StudentL->checkUser($student['name'], $post['password']) === false))
         {
-            $result['status'] = "ERROR";
-            $result["message"] = $StudentL->getError();
-
-        }
-        else
-        {
-            $result['status'] = "SUCCESS";
+            $this->error("原密码错误", U('personalCenter'));
+            return;
         }
 
-        $this->ajaxReturn($result);
+        //如果传入的密码不为空
+        if ($post['password'] !== "")
+        {
+            $data['password'] = $StudentL->makePassword($post['newpassword']);
+        }
+        
+        if ($StudentL->saveList($data) === false)
+        {
+            $this->error("数据更新发生错误.错误信息" . $StudentL->getError(), U('personalCenter'),100);
+            return;
+        }
+
+        $student = $StudentL->getListById($student['id']);
+        session('student', $student);
+        $this->success("操作成功", U('personalCenter'));
+    }
+
+    public function workAction()
+    {
+        $this->display();
     }
 }
