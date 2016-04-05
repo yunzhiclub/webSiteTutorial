@@ -51,8 +51,11 @@ class UploadController extends Controller
      * 投交作业 附件接口
      * @return json
      */
-    public function uploadWorkAction()
+    public function uploadHtmlAction()
     {
-
+        $AttachmentL = new AttachmentLogic();
+        $config = array("fileAllowFiles"=>array(".html"));
+        $attachment = $AttachmentL->upload("uploadfile", $config);
+        $this->ajaxReturn($attachment);
     }
 }
