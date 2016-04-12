@@ -38,19 +38,18 @@ class StudentLogic extends StudentModel
         $user = $this->getListById($id);
 
         //判断原密码是否正确
-        $password = sha1($list['password']);
+        $password = $this->makePassword($list['password']);
         if ($password !== $user['password'])
         {
             $this->setError("UserLogic->updateList:The old password is incorrect.(原密码输入错误)");
             return $this;
         }
 
-        $repassword = sha1($list['repassword']);
         //如果传入的新密码为空，则不重置密码;非空，则重置密码
         $repassword = isset($list['repassword']) ? trim($list['repassword']) : '';
         if ($repassword !== "")
         {
-            $user['password'] = sha1($repassword);
+            $user['password'] = $this->makePassword($repassword);
         }
 
         //取其它更新的数据
@@ -195,7 +194,7 @@ class StudentLogic extends StudentModel
 
         if ($list['password'] !== $this->makePassword($password))
         {
-            $this->setError = "password increct";
+            $this->setError("password increct");
             return false;
         }
 
