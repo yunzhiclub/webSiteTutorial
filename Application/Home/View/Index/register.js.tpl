@@ -46,7 +46,6 @@ app.controller("register", function($scope, $http, $window) {
             "method":"post", 
             "url": "{:U('Login/register')}", 
             "data":$scope.student, 
-            "headers":{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
             }).success(function(response) {
                 if (response.status === "SUCCESS")
                 {
