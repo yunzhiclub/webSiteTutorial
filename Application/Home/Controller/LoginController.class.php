@@ -79,6 +79,7 @@ class LoginController extends Controller
     {
         $result = array("class"=>"", 'is_visitor'=>0);
 
+        //获取angularjs post数据
         $postdata = file_get_contents("php://input");
         $post = json_decode($postdata, true);
         
@@ -115,19 +116,22 @@ class LoginController extends Controller
 
     public function registerAction()
     {
+        //接收angularjs post数据
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST))
             $_POST = json_decode(file_get_contents('php://input'), true);
-
+        
+        $StudentL = new StudentLogic();
+        
         $data = array();
         $student['id'] = I('post.id');
         $student['num'] = I('post.num');
         $student['name'] =I('post.name');
-        $student['password'] = sha1(I('password'));
+        $student['password'] = $StudentL->makePassword(I('password'));
         $student['is_visitor'] = I('post.is_visitor');
         $student['class'] = I('post.class');
         $student['is_registered'] = 1;
 
-        $StudentL = new StudentLogic();
+        
         if ($StudentL->saveList($student) === false)
         {
             $result['status'] = "ERROR";
