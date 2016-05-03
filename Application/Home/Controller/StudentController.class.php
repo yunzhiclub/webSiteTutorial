@@ -12,7 +12,7 @@ use Work\Logic\WorkLogic;                   //作业
 
 class StudentController extends HomeController
 {
-    private $index = '1';
+    private $index = '2';
     public function personalCenterAction()
     {
         $student = session("student");
