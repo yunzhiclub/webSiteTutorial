@@ -11,7 +11,7 @@
             </div>
             <input type="hidden" name="attachment_id" value="{{attachment_id}}" />
         </div>
-        <div class="btn btn-primary" ngf-select="upload($file)" ng-model="file" name="file" ngf-pattern="'text/html'" ngf-accept="'text/html'" ngf-max-size="20MB">请选择作业文件</div>
+        <div class="btn btn-primary" ngf-select="upload($file)" ng-model="file" name="file" ngf-pattern="'text/html,text/htm'" ngf-accept="'text/html,text/htm'" ngf-max-size="20MB">请选择作业文件</div>
         <button class="btn btn-success" type="submit">提交</button>
         </form>
     </div>
