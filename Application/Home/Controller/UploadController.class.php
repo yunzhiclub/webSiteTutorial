@@ -54,7 +54,7 @@ class UploadController extends Controller
     public function uploadHtmlAction()
     {
         $AttachmentL = new AttachmentLogic();
-        $config = array("fileAllowFiles"=>array(".html"));
+        $config = array("fileAllowFiles"=>array(".html",".htm"));
         $attachment = $AttachmentL->upload("uploadfile", $config);
         $this->ajaxReturn($attachment);
     }
