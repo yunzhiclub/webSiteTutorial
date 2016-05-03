@@ -38,7 +38,10 @@
                                         <div class="col-md-8">
                                             <input id="file" name="filename" type="file" multiple="true" value="上传图片" />
                                         </div>
-                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-2 col-md-push-2  bg-danger">上传按钮依赖于flash插件，请点击进行安装.<a href="https://get.adobe.com/cn/flashplayer/">https://get.adobe.com/cn/flashplayer/</a>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-6 text-center">
