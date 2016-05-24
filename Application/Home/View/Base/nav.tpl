@@ -10,6 +10,10 @@
                 <li <eq name="ACTION_NAME" value="work">class="active"</eq>>
                     <a href="{:U('student/work')}">作业提交</a>
                 </li>
+                <li
+                    <eq name="ACTION_NAME" value="sae">class="active"</eq>>
+                    <a href="{:U('student/sae')}">SAE域名提交</a>
+                </li>
                 <li <eq name="ACTION_NAME" value="personalCenter">class="active"</eq>>
                     <a href="{:U('Student/personalCenter')}">个人中心</a>
                 </li>

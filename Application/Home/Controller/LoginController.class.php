@@ -18,7 +18,7 @@ class LoginController extends Controller
         $student = $StudentL->validate($num,$password);
         if ($student !== false)
         {
-            session('student', $student);
+            session('studentId', $student['id']);
             $this->success("登陆成功", U('Index/home'));
         }
         else
@@ -32,7 +32,7 @@ class LoginController extends Controller
     //注销功能
     public function logoutAction()
     {
-        session('student',null);
+        session('studentId',null);
         $this->success('注销成功', U('Index/index'));
     }
 

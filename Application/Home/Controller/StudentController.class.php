@@ -15,7 +15,7 @@ class StudentController extends HomeController
     private $index = '2';
     public function personalCenterAction()
     {
-        $student = session("student");
+        $student = $this->getStudent();
         $M = new personalCenterModel();
 
         $this->assign("M", $M);
@@ -120,5 +120,22 @@ class StudentController extends HomeController
         }
 
         
+    }
+
+    public function saeAction()
+    {
+        $this->assign('student1', $this->getStudent());
+        $this->display();
+    }
+
+    public function saveUrlAction()
+    {
+        $student = $this->getStudent();
+        $data = array();
+        $data['id'] = $student['id'];
+        $data['url'] = I('post.url');
+        $StudentL = new StudentLogic();
+        $StudentL->save($data);
+        $this->success("操作成功", U('sae'));
     }
 }
