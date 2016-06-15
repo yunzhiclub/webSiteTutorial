@@ -43,7 +43,7 @@
                     <div class="panel-body">
                         <form role="form"  id="loginform" method = 'post' action="{:U('Login/login')}">
                             <fieldset>
-                                <div class="form-group">
+                                <!--div class="form-group">
                                     <input class="form-control" placeholder="学号" name="num" id="num" required>
                                 </div>
                                 <div class="form-group">
@@ -52,10 +52,11 @@
                                 <div class="form-group">
                                     <button class="btn btn-lg btn-success btn-block" id="login">登录</button>
                                 </div>
-                                <div class="form-group">还没有用户名？请<a href="{:U('register')}">注册</a></div>
+
+                                <div class="form-group">还没有用户名？请<a href="{:U('register')}">注册</a></div-->
+                                系统关闭
                             </fieldset>
                         </form>
-
                     </div>
                 </div>
             </block>
