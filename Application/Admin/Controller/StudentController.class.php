@@ -22,6 +22,23 @@ class StudentController extends AdminController
         $this -> display();
     }
 
+    // 上传成绩
+    public function submitScoreAjaxAction()
+    {
+        $score = (int)I('get.score');
+        $score = $score < 0 ? 0 : $score > 100 ? 100 :$score;
+        $studentId = I('get.studentId');
+
+        $student = array('id'=>$studentId, 'score'=>$score);
+        $StudentL = new StudentLogic();
+        $StudentL->saveList($student);
+
+        $result = array();
+        $result['status'] = 'SUCCESS';
+
+        $this->ajaxReturn($result);
+    }
+
     public function uploadExcelAction()
     {
         //上传附件
